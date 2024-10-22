@@ -1,4 +1,4 @@
-//Opens a window with buttons and other things
+//Code I found online that opens a window with buttons and other things
 package Javamon;
 
 import java.awt.*;
