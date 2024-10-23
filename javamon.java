@@ -13,20 +13,24 @@ public class javamon
 
     private void displayGUI()
     {
+        //set title of window to Java-Mon and store in frame
         JFrame frame = new JFrame("Java-Mon");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel contentPane = new JPanel();
-        contentPane.setBorder(
-            BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new CardLayout());
+        //create different windows
         panel1 = new MyPanel(contentPane);
         panel2 = new MyPanel2();
         contentPane.add(panel1, "Panel 1"); 
         contentPane.add(panel2, "Panel 2");
         frame.setContentPane(contentPane);
-        frame.pack();   
-        frame.setLocationByPlatform(true);
+        //contains pack to minimize, expand, and close window
+        frame.pack();  
+        //makes window pop up at a random location, w/o line, window will pop up top left corner 
+        //frame.setLocationByPlatform(true);
+        //makes window visible
         frame.setVisible(true);
     }
 
@@ -36,12 +40,14 @@ public class javamon
         {
             public void run()
             {
+                //show window
                 new javamon().displayGUI();
             }
         });
     }
 }
 
+//Class for first Panel
 class MyPanel extends JPanel {
 
     private JTextField How;
@@ -53,8 +59,9 @@ class MyPanel extends JPanel {
     public MyPanel(JPanel panel) {
 
         contentPane = panel;
-        //construct components
-        How = new JTextField (1);
+        //How is a text box component; allow users to insert text
+        How = new JTextField (3);
+        //construct text components
         jcomp2 = new JLabel ("How long were you parked?");
         jcomp3 = new JLabel ("Minutes");
         jcomp4 = new JButton ("openNewWindow");
@@ -69,6 +76,7 @@ class MyPanel extends JPanel {
         jcomp3.setBounds (250, 30, 60, 20);
         jcomp4.setLocation(0, 0);
         jcomp4.setSize(315, 25);
+        //Makes buttom usable, jumps it to next content frame
         jcomp4.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
