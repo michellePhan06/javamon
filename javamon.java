@@ -4,6 +4,9 @@ package Javamon;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class javamon
 {
@@ -16,6 +19,7 @@ public class javamon
         //set title of window to Java-Mon and store in frame
         JFrame frame = new JFrame("Java-Mon");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setSize(400,400);
 
         JPanel contentPane = new JPanel();
         contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -53,31 +57,36 @@ class MyPanel extends JPanel {
     private JTextField How;
     private JLabel jcomp2;
     private JLabel jcomp3;
-    private JButton jcomp4;
+    private JButton playButton;
     private JPanel contentPane;
 
     public MyPanel(JPanel panel) {
 
         contentPane = panel;
-        //How is a text box component; allow users to insert text
+        //'How' is a text box component; allow users to insert text; we probably don't need but keep just in case
         How = new JTextField (3);
         //construct text components
         jcomp2 = new JLabel ("How long were you parked?");
         jcomp3 = new JLabel ("Minutes");
-        jcomp4 = new JButton ("openNewWindow");
+        playButton = new JButton ("Play!");
 
-        //adjust size and set layout
-        setPreferredSize (new Dimension (315, 85));
+        //adjust size and set layout of window
+        setPreferredSize (new Dimension (1280, 720));
         setLayout (null);
 
+        //add opening window image
+        ImageIcon imageIcon = new ImageIcon("Javamon_openingScreen.jpg");
+        JLabel label = new JLabel(imageIcon);
+
         //set component bounds (only needed by Absolute Positioning)
+        label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
         How.setBounds (245, 50, 60, 25);
         jcomp2.setBounds (35, 30, 185, 50);
         jcomp3.setBounds (250, 30, 60, 20);
-        jcomp4.setLocation(0, 0);
-        jcomp4.setSize(315, 25);
+        playButton.setLocation(620, 600);
+        playButton.setSize(100, 50);
         //Makes buttom usable, jumps it to next content frame
-        jcomp4.addActionListener( new ActionListener()
+        playButton.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
@@ -90,7 +99,8 @@ class MyPanel extends JPanel {
         add (How);
         add (jcomp2);
         add (jcomp3);
-        add (jcomp4);               
+        add (playButton);  
+        add (label);             
     }
 }
 
