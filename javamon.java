@@ -1,6 +1,7 @@
 //Code I found online that opens a window with buttons and other things
 package Javamon;
 
+//libraries to help build the GUI handling events and managing layout
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -8,23 +9,23 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class javamon
+public class javamon //main class where displayGUI contructs the window
 {
     private JPanel contentPane;
-    private MyPanel panel1;
+    private MyPanel panel1; 
     private MyPanel2 panel2;
 
     private void displayGUI()
     {
         //set title of window to Java-Mon and store in frame
-        JFrame frame = new JFrame("Java-Mon");
+        JFrame frame = new JFrame("Java-Mon"); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setSize(400,400);
 
-        JPanel contentPane = new JPanel();
-        contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(new CardLayout());
-        //create different windows
+        JPanel contentPane = new JPanel(); 
+        contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); //border thickness
+        contentPane.setLayout(new CardLayout()); //card layout allows for multiple windows
+        //create different windows for different panels
         panel1 = new MyPanel(contentPane);
         panel2 = new MyPanel2();
         contentPane.add(panel1, "Panel 1"); 
@@ -54,9 +55,9 @@ public class javamon
 //Class for first Panel
 class MyPanel extends JPanel {
 
-    private JTextField How;
-    private JLabel jcomp2;
-    private JLabel jcomp3;
+    // private JTextField How;
+    // private JLabel jcomp2;
+    // private JLabel jcomp3;
     private JButton playButton;
     private JPanel contentPane;
 
@@ -64,10 +65,10 @@ class MyPanel extends JPanel {
 
         contentPane = panel;
         //'How' is a text box component; allow users to insert text; we probably don't need but keep just in case
-        How = new JTextField (3);
-        //construct text components
-        jcomp2 = new JLabel ("How long were you parked?");
-        jcomp3 = new JLabel ("Minutes");
+        // How = new JTextField (3);
+        //construct text components 
+        // jcomp2 = new JLabel ("How long were you parked?");
+        // jcomp3 = new JLabel ("Minutes");
         playButton = new JButton ("Play!");
 
         //adjust size and set layout of window
@@ -80,9 +81,9 @@ class MyPanel extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
         label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
-        How.setBounds (245, 50, 60, 25);
-        jcomp2.setBounds (35, 30, 185, 50);
-        jcomp3.setBounds (250, 30, 60, 20);
+        // How.setBounds (245, 50, 60, 25);
+        // jcomp2.setBounds (35, 30, 185, 50);
+        // jcomp3.setBounds (250, 30, 60, 20);
         playButton.setLocation(620, 600);
         playButton.setSize(100, 50);
         //Makes buttom usable, jumps it to next content frame
@@ -96,9 +97,9 @@ class MyPanel extends JPanel {
         });
 
         //add components
-        add (How);
-        add (jcomp2);
-        add (jcomp3);
+        // add (How);
+        // add (jcomp2);
+        // add (jcomp3);
         add (playButton);  
         add (label);             
     }
