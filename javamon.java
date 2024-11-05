@@ -21,15 +21,16 @@ public class javamon //main class where displayGUI contructs the window
         JFrame frame = new JFrame("Java-Mon"); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setSize(400,400);
-
         JPanel contentPane = new JPanel(); 
         contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); //border thickness
         contentPane.setLayout(new CardLayout()); //card layout allows for multiple windows
         //create different windows for different panels
         panel1 = new MyPanel(contentPane);
         panel2 = new MyPanel2();
+        // panel3 = new MyPanel3();
         contentPane.add(panel1, "Panel 1"); 
         contentPane.add(panel2, "Panel 2");
+        // contentPane.add(panel3, "Panel 3");
         frame.setContentPane(contentPane);
         //contains pack to minimize, expand, and close window
         frame.pack();  
@@ -76,7 +77,7 @@ class MyPanel extends JPanel {
         setLayout (null);
 
         //add opening window image
-        ImageIcon imageIcon = new ImageIcon("Javamon_openingScreen.jpg");
+        ImageIcon imageIcon = new ImageIcon("javamon_openingScreen.png");
         JLabel label = new JLabel(imageIcon);
 
         //set component bounds (only needed by Absolute Positioning)
@@ -109,38 +110,52 @@ class MyPanel2 extends JPanel {
     private JButton jcomp1;
     private JButton jcomp2;
     private JButton jcomp3;
-    private JTextField jcomp4;
+    // private JTextField jcomp4;
 
     public MyPanel2() {
+
+        ImageIcon pokeballLeft = new ImageIcon("pokeball_button_left.jpeg");
+        ImageIcon pokeballMiddle = new ImageIcon("pokeball_button_middle.jpeg");
+        ImageIcon pokeballRight = new ImageIcon("pokeball_button_right.jpeg");
         //construct components
-        jcomp1 = new JButton ("test1");
-        jcomp2 = new JButton ("test2");
-        jcomp3 = new JButton ("test3");
-        jcomp4 = new JTextField (5);
+        jcomp1 = new JButton (new ImageIcon("pokeball_button_left.jpeg"));
+        jcomp2 = new JButton (new ImageIcon("pokeball_button_middle.jpeg"));
+        jcomp3 = new JButton (new ImageIcon("pokeball_button_right.jpeg"));
+        // jcomp4 = new JTextField (5);
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (395, 156));
+        setPreferredSize (new Dimension (1280,720));
         setLayout (null);
-
         //set component bounds (only needed by Absolute Positioning)
-        jcomp1.setBounds (20, 45, 100, 25);
-        jcomp2.setBounds (135, 60, 100, 25);
-        jcomp3.setBounds (260, 35, 100, 25);
-        jcomp4.setBounds (105, 115, 100, 25);
+
+        ImageIcon imageIcon = new ImageIcon("Selection_Panel.jpg");
+        JLabel label = new JLabel(imageIcon);
+
+        label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
+
+        jcomp1.setBounds (183, 237, 277, 339);
+        jcomp2.setBounds (505, 237, 277, 339);
+        jcomp3.setBounds (830, 237, 277, 339);
+        // jcomp4.setBounds (105, 115, 100, 25);
 
         //add components
         add (jcomp1);
         add (jcomp2);
         add (jcomp3);
-        add (jcomp4);       
+        add (label);
+        // add (jcomp4);       
     }
 }
 
-// // Opens a empty Window
-// package Javamon;
-// import java.awt.*;
-// import java.awt.event.WindowAdapter;
-// import java.awt.event.WindowEvent;
+// class MyPanel3 extends JPanel {  THIS WILL BE BATTLE SCREEN
+//     public MyPanel2() {
+
+//     }
+
+// }
+
+
+// Opens a empty Window
 
 // public class javamon extends Frame{
 //     static Image img;
