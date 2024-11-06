@@ -131,7 +131,7 @@ class MyPanel2 extends JPanel {
         setLayout (null);
         //set component bounds (only needed by Absolute Positioning)
 
-        ImageIcon imageIcon = new ImageIcon("Selection_Panel.jpg");
+        ImageIcon imageIcon = new ImageIcon("Selection_Panel.png");
         JLabel label = new JLabel(imageIcon);
 
         label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
