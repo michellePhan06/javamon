@@ -70,7 +70,10 @@ class MyPanel extends JPanel {
         //construct text components 
         // jcomp2 = new JLabel ("How long were you parked?");
         // jcomp3 = new JLabel ("Minutes");
-        playButton = new JButton ("Play!");
+        ImageIcon playButtonIcon = new ImageIcon("PlayButton.png");
+        playButton = new JButton (playButtonIcon);
+        playButton.setContentAreaFilled(false);
+
 
         //adjust size and set layout of window
         setPreferredSize (new Dimension (1280, 720));
@@ -85,8 +88,8 @@ class MyPanel extends JPanel {
         // How.setBounds (245, 50, 60, 25);
         // jcomp2.setBounds (35, 30, 185, 50);
         // jcomp3.setBounds (250, 30, 60, 20);
-        playButton.setLocation(620, 600);
-        playButton.setSize(100, 50);
+        playButton.setLocation(520, 550);
+        playButton.setSize(350, 150);
         //Makes buttom usable, jumps it to next content frame
         playButton.addActionListener( new ActionListener()
         {
