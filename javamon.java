@@ -5,9 +5,18 @@ package Javamon;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+
+//importing libraryies to add sound
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 public class javamon //main class where displayGUI contructs the window
 {
@@ -50,6 +59,41 @@ public class javamon //main class where displayGUI contructs the window
                 new javamon().displayGUI();
             }
         });
+    }
+
+    //method to play audio lol
+    public static void playMusic(String filePath, float volume) 
+    {
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(filePath));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(volume);
+
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY); // continously loops music
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //plays clicking sound lol
+    public static void playClickSound(String filePath, float volume)
+    {
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(filePath));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(volume);
+
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        e.printStackTrace();
+        }
     }
 }
 
@@ -95,6 +139,7 @@ class MyPanel extends JPanel {
         {
             public void actionPerformed(ActionEvent e)
             {
+                javamon.playClickSound("audio-files\\click.wav", -20.f);
                 CardLayout cardLayout = (CardLayout) contentPane.getLayout();
                 cardLayout.next(contentPane);
             }
@@ -105,7 +150,10 @@ class MyPanel extends JPanel {
         // add (jcomp2);
         // add (jcomp3);
         add (playButton);  
-        add (label);             
+        add (label);   
+        
+        //plays music when panel 1 loads
+        javamon.playMusic("audio-files\\panel1.wav", -20.f);
     }
 }
 
