@@ -23,6 +23,7 @@ public class javamon //main class where displayGUI contructs the window
     private JPanel contentPane;
     private MyPanel panel1; 
     private MyPanel2 panel2;
+    private MyPanel3 panel3;
 
     private void displayGUI()
     {
@@ -35,16 +36,14 @@ public class javamon //main class where displayGUI contructs the window
         contentPane.setLayout(new CardLayout()); //card layout allows for multiple windows
         //create different windows for different panels
         panel1 = new MyPanel(contentPane);
-        panel2 = new MyPanel2();
-        // panel3 = new MyPanel3();
+        panel2 = new MyPanel2(contentPane);
+        panel3 = new MyPanel3(contentPane);
         contentPane.add(panel1, "Panel 1"); 
         contentPane.add(panel2, "Panel 2");
-        // contentPane.add(panel3, "Panel 3");
+        contentPane.add(panel3, "Panel 3");
         frame.setContentPane(contentPane);
         //contains pack to minimize, expand, and close window
         frame.pack();  
-        //makes window pop up at a random location, w/o line, window will pop up top left corner 
-        //frame.setLocationByPlatform(true);
         //makes window visible
         frame.setVisible(true);
     }
@@ -97,7 +96,7 @@ public class javamon //main class where displayGUI contructs the window
     }
 }
 
-//Class for first Panel
+//Class for first Opening Panel
 class MyPanel extends JPanel {
 
     // private JTextField How;
@@ -116,6 +115,7 @@ class MyPanel extends JPanel {
         // jcomp3 = new JLabel ("Minutes");
         ImageIcon playButtonIcon = new ImageIcon("PlayButton.png");
         playButton = new JButton (playButtonIcon);
+        //makes button image transparent
         playButton.setContentAreaFilled(false);
 
 
@@ -157,14 +157,16 @@ class MyPanel extends JPanel {
     }
 }
 
+// Panel to select starter pokemon
 class MyPanel2 extends JPanel {
     private JButton jcomp1;
     private JButton jcomp2;
     private JButton jcomp3;
     // private JTextField jcomp4;
+    private JPanel contentPane;
 
-    public MyPanel2() {
-
+    public MyPanel2(JPanel panel) {
+        contentPane = panel;
         ImageIcon pokeballLeft = new ImageIcon("pokeball_button_left.jpeg");
         ImageIcon pokeballMiddle = new ImageIcon("pokeball_button_middle.jpeg");
         ImageIcon pokeballRight = new ImageIcon("pokeball_button_right.jpeg");
@@ -174,9 +176,10 @@ class MyPanel2 extends JPanel {
         jcomp3 = new JButton (pokeballRight);
         // jcomp4 = new JTextField (5);
 
-        //adjust size and set layout
-        setPreferredSize (new Dimension (1280,720));
+        //adjust size and set layout of window
+        setPreferredSize (new Dimension (1280, 720));
         setLayout (null);
+
         //set component bounds (only needed by Absolute Positioning)
 
         ImageIcon imageIcon = new ImageIcon("Selection_Panel.png");
@@ -189,6 +192,34 @@ class MyPanel2 extends JPanel {
         jcomp3.setBounds (830, 237, 277, 339);
         // jcomp4.setBounds (105, 115, 100, 25);
 
+        jcomp1.addActionListener( new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                javamon.playClickSound("audio-files\\click.wav", -20.f);
+                CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+                cardLayout.next(contentPane);
+            }
+        });
+        jcomp2.addActionListener( new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                javamon.playClickSound("audio-files\\click.wav", -20.f);
+                CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+                cardLayout.next(contentPane);
+            }
+        });
+        jcomp3.addActionListener( new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                javamon.playClickSound("audio-files\\click.wav", -20.f);
+                CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+                cardLayout.next(contentPane);
+            }
+        });
+
         //add components
         add (jcomp1);
         add (jcomp2);
@@ -198,9 +229,21 @@ class MyPanel2 extends JPanel {
     }
 }
 
-// class MyPanel3 extends JPanel {  THIS WILL BE BATTLE SCREEN
-//     public MyPanel2() {
+//Battle Screen Panel
+class MyPanel3 extends JPanel { 
+    private JPanel contentPane;
+    public MyPanel3(JPanel panel) {
+        contentPane = panel;
+        ImageIcon imageIcon = new ImageIcon("battleScreen.png");
+        JLabel battleScreen = new JLabel(imageIcon);
 
-//     }
+        //adjust size and set layout of window
+        setPreferredSize (new Dimension (1280, 720));
+        setLayout (null);
 
-// }
+        battleScreen.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
+
+        add (battleScreen);
+    }
+
+}
