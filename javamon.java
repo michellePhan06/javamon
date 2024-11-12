@@ -113,7 +113,7 @@ class MyPanel extends JPanel {
         //construct text components 
         // jcomp2 = new JLabel ("How long were you parked?");
         // jcomp3 = new JLabel ("Minutes");
-        ImageIcon playButtonIcon = new ImageIcon("PlayButton.png");
+        ImageIcon playButtonIcon = new ImageIcon("buttons/PlayButton.png");
         playButton = new JButton (playButtonIcon);
         //makes button image transparent
         playButton.setContentAreaFilled(false);
@@ -124,7 +124,7 @@ class MyPanel extends JPanel {
         setLayout (null);
 
         //add opening window image
-        ImageIcon imageIcon = new ImageIcon("javamon_openingScreen.png");
+        ImageIcon imageIcon = new ImageIcon("panels/javamon_openingScreen.png");
         JLabel label = new JLabel(imageIcon);
 
         //set component bounds (only needed by Absolute Positioning)
@@ -139,7 +139,7 @@ class MyPanel extends JPanel {
         {
             public void actionPerformed(ActionEvent e)
             {
-                javamon.playClickSound("audio-files\\click.wav", -20.f);
+                javamon.playClickSound("audio-files/click.wav", -20.f);
                 CardLayout cardLayout = (CardLayout) contentPane.getLayout();
                 cardLayout.next(contentPane);
             }
@@ -153,7 +153,7 @@ class MyPanel extends JPanel {
         add (label);   
         
         //plays music when panel 1 loads
-        javamon.playMusic("audio-files\\panel1.wav", -20.f);
+        javamon.playMusic("audio-files/panel1.wav", -20.f);
     }
 }
 
@@ -167,9 +167,9 @@ class MyPanel2 extends JPanel {
 
     public MyPanel2(JPanel panel) {
         contentPane = panel;
-        ImageIcon pokeballLeft = new ImageIcon("pokeball_button_left.jpeg");
-        ImageIcon pokeballMiddle = new ImageIcon("pokeball_button_middle.jpeg");
-        ImageIcon pokeballRight = new ImageIcon("pokeball_button_right.jpeg");
+        ImageIcon pokeballLeft = new ImageIcon("buttons/panel-2/waterPokeball.jpeg");
+        ImageIcon pokeballMiddle = new ImageIcon("buttons/panel-2/grassPokeball.jpeg");
+        ImageIcon pokeballRight = new ImageIcon("buttons/panel-2/firePokeball.jpeg");
         //construct components
         jcomp1 = new JButton (pokeballLeft);
         jcomp2 = new JButton (pokeballMiddle);
@@ -182,7 +182,7 @@ class MyPanel2 extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
 
-        ImageIcon imageIcon = new ImageIcon("Selection_Panel.png");
+        ImageIcon imageIcon = new ImageIcon("panels/Selection_Panel.png");
         JLabel label = new JLabel(imageIcon);
 
         label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
@@ -196,7 +196,7 @@ class MyPanel2 extends JPanel {
         {
             public void actionPerformed(ActionEvent e)
             {
-                javamon.playClickSound("audio-files\\click.wav", -20.f);
+                javamon.playClickSound("audio-files/click.wav", -20.f);
                 CardLayout cardLayout = (CardLayout) contentPane.getLayout();
                 cardLayout.next(contentPane);
             }
@@ -205,7 +205,7 @@ class MyPanel2 extends JPanel {
         {
             public void actionPerformed(ActionEvent e)
             {
-                javamon.playClickSound("audio-files\\click.wav", -20.f);
+                javamon.playClickSound("audio-files/click.wav", -20.f);
                 CardLayout cardLayout = (CardLayout) contentPane.getLayout();
                 cardLayout.next(contentPane);
             }
@@ -214,7 +214,7 @@ class MyPanel2 extends JPanel {
         {
             public void actionPerformed(ActionEvent e)
             {
-                javamon.playClickSound("audio-files\\click.wav", -20.f);
+                javamon.playClickSound("audio-files/click.wav", -20.f);
                 CardLayout cardLayout = (CardLayout) contentPane.getLayout();
                 cardLayout.next(contentPane);
             }
@@ -234,7 +234,7 @@ class MyPanel3 extends JPanel {
     private JPanel contentPane;
     public MyPanel3(JPanel panel) {
         contentPane = panel;
-        ImageIcon imageIcon = new ImageIcon("battleScreen.png");
+        ImageIcon imageIcon = new ImageIcon("panels/battleScreen.png");
         JLabel battleScreen = new JLabel(imageIcon);
 
         //adjust size and set layout of window
