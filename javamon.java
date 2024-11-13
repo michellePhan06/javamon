@@ -9,6 +9,7 @@ import javax.swing.*;
 //importing libraryies to add sound
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
@@ -230,10 +231,26 @@ class MyPanel2 extends JPanel {
 }
 
 //Battle Screen Panel
-class MyPanel3 extends JPanel { 
+class MyPanel3 extends JPanel {
+    
+    private JButton tackleButton;
     private JPanel contentPane;
+    private JLabel playerHealth;
+    private JLabel enemyHealth;
+
     public MyPanel3(JPanel panel) {
         contentPane = panel;
+    
+        final JLabel playerHealth = new JLabel("30/30");
+        final JLabel enemyHealth = new JLabel("30/30");
+
+        //Tackle button
+        ImageIcon tackleButtonIcon = new ImageIcon("buttons/PlayButton.png");
+        tackleButton = new JButton (tackleButtonIcon);
+        //makes button image transparent
+        tackleButton.setContentAreaFilled(false);
+
+        //battle Screen Image
         ImageIcon imageIcon = new ImageIcon("panels/battleScreen.png");
         JLabel battleScreen = new JLabel(imageIcon);
 
@@ -243,6 +260,52 @@ class MyPanel3 extends JPanel {
 
         battleScreen.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
 
+        //health text set up
+        playerHealth.setFont(new Font("Serif", Font.BOLD, 35));
+        playerHealth.setOpaque(false);
+        playerHealth.setForeground(Color.RED); 
+        playerHealth.setBounds (150, 200, 200, 200);
+
+        enemyHealth.setFont(new Font("Serif", Font.BOLD, 35));
+        enemyHealth.setOpaque(false);
+        enemyHealth.setForeground(Color.RED); 
+        enemyHealth.setBounds (1000, 200, 200, 200);
+
+        //tackleButton set up
+        tackleButton.setLocation(520, 550);
+        tackleButton.setSize(350, 150);
+        
+        //Makes buttom usable, when clicked, enemy health - 10
+        tackleButton.addActionListener(new ActionListener()
+        {
+            private int enemyHP = 30;
+            private int playerHP = 30;
+            public void actionPerformed(ActionEvent e)
+            {
+                javamon.playClickSound("audio-files/click.wav", -20.f);
+                enemyHP = enemyHP-10;
+                enemyHealth.setText(enemyHP+"/30");
+
+                // wait 1 second before player gets attacked
+                Timer timer = new Timer(1000, new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        // Update player's HP
+                        playerHP -= 10;
+                        playerHealth.setText(playerHP + "/30");
+                    }
+                });
+
+                // Make sure the timer only fires once, then stop
+                timer.setRepeats(false);
+                timer.start();
+            }
+            
+            
+        });
+
+        add (playerHealth);
+        add (enemyHealth);
+        add (tackleButton);
         add (battleScreen);
     }
 
