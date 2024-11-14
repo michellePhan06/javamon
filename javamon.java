@@ -193,33 +193,10 @@ class MyPanel2 extends JPanel {
         jcomp3.setBounds (830, 237, 277, 339);
         // jcomp4.setBounds (105, 115, 100, 25);
 
-        jcomp1.addActionListener( new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                javamon.playClickSound("audio-files/click.wav", -20.f);
-                CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-                cardLayout.next(contentPane);
-            }
-        });
-        jcomp2.addActionListener( new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                javamon.playClickSound("audio-files/click.wav", -20.f);
-                CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-                cardLayout.next(contentPane);
-            }
-        });
-        jcomp3.addActionListener( new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                javamon.playClickSound("audio-files/click.wav", -20.f);
-                CardLayout cardLayout = (CardLayout) contentPane.getLayout();
-                cardLayout.next(contentPane);
-            }
-        });
+        //sends Javamon's Name to selectJavamon
+        jcomp1.addActionListener(e -> selectJavamon("Petermon"));
+        jcomp2.addActionListener(e -> selectJavamon("Sprouty"));
+        jcomp3.addActionListener(e -> selectJavamon("Bowchelle"));
 
         //add components
         add (jcomp1);
@@ -227,6 +204,15 @@ class MyPanel2 extends JPanel {
         add (jcomp3);
         add (label);
         // add (jcomp4);       
+    }
+
+    //what happens when the buttons are pressed and sends the selected Javamon's Name
+    private void selectJavamon(String javamonName) {
+        javamon.playClickSound("audio-files/click.wav", -20.f);
+        MyPanel3 panel3 = (MyPanel3) contentPane.getComponent(2);
+        panel3.setPlayerJavamonName(javamonName);
+        CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+        cardLayout.next(contentPane);
     }
 }
 
@@ -237,8 +223,11 @@ class MyPanel3 extends JPanel {
     private JPanel contentPane;
     private JLabel playerHealth;
     private JLabel enemyHealth;
+    private JLabel playerName;
+    private JLabel enemyName;
 
     public MyPanel3(JPanel panel) {
+        
         contentPane = panel;
     
         final JLabel playerHealth = new JLabel("30/30");
@@ -260,16 +249,30 @@ class MyPanel3 extends JPanel {
 
         battleScreen.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
 
+        // Set up Javamon name
+        //playerName is dynamically set so it can be updated
+        playerName = new JLabel();
+        playerName.setFont(new Font("Serif", Font.BOLD, 35));
+        playerName.setOpaque(false);
+        playerName.setForeground(Color.RED);
+        playerName.setBounds(150, 150, 200, 50);
+
+        enemyName = new JLabel("Hitman-Thom");
+        enemyName.setFont(new Font("Serif", Font.BOLD, 35));
+        enemyName.setOpaque(false);
+        enemyName.setForeground(Color.RED);
+        enemyName.setBounds(1000, 150, 200, 50);
+
         //health text set up
         playerHealth.setFont(new Font("Serif", Font.BOLD, 35));
         playerHealth.setOpaque(false);
         playerHealth.setForeground(Color.RED); 
-        playerHealth.setBounds (150, 200, 200, 200);
+        playerHealth.setBounds (150, 200, 200, 50);
 
         enemyHealth.setFont(new Font("Serif", Font.BOLD, 35));
         enemyHealth.setOpaque(false);
-        enemyHealth.setForeground(Color.RED); 
-        enemyHealth.setBounds (1000, 200, 200, 200);
+        enemyHealth.setForeground(Color.RED);
+        enemyHealth.setBounds (1000, 200, 200, 50);
 
         //tackleButton set up
         tackleButton.setLocation(520, 550);
@@ -307,6 +310,11 @@ class MyPanel3 extends JPanel {
         add (enemyHealth);
         add (tackleButton);
         add (battleScreen);
+        add (playerName);
+        add (enemyName);
     }
-
+    //Updates text of playerName to chosen name based on which button is pressed on MyPanel2
+    public void setPlayerJavamonName(String name) {
+        playerName.setText(name);
+    }
 }
