@@ -161,10 +161,6 @@ class MyPanel extends JPanel {
             }
         });
 
-        //add components
-        // add (How);
-        // add (jcomp2);
-        // add (jcomp3);
         add (playButton);  
         add (label);   
         
@@ -175,10 +171,6 @@ class MyPanel extends JPanel {
 
 // Panel to select starter pokemon
 class MyPanel2 extends JPanel {
-    //private JButton jcomp1;
-    //private JButton jcomp2;
-    //private JButton jcomp3;
-    // private JTextField jcomp4;
     private JPanel contentPane;
 
     public MyPanel2(JPanel panel) {
