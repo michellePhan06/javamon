@@ -17,25 +17,6 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-//class for selected pokemon to import from panel 2 to panel 3
-class Pokemon {
-    private String name;
-    private String spritePath;
-
-    public Pokemon(String name, String spritePath) {
-        this.name = name;
-        this.spritePath = spritePath;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSpritePath() {
-        return spritePath;
-    }
-}
-
 public class javamon //main class where displayGUI contructs the window
 {
     private JPanel contentPane;
@@ -157,6 +138,25 @@ class MyPanel extends JPanel {
         
         //plays music when panel 1 loads
         javamon.playMusic("audio-files/panel1.wav", -20.f);
+    }
+}
+
+//class for selected pokemon to import from panel 2 to panel 3
+class Pokemon {
+    private String name;
+    private String spritePath;
+
+    public Pokemon(String name, String spritePath) {
+        this.name = name;
+        this.spritePath = spritePath;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSpritePath() {
+        return spritePath;
     }
 }
 
