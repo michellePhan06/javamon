@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-//importing libraryies to add sound
+//importing libraries to add sound
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -114,21 +114,12 @@ public class javamon //main class where displayGUI contructs the window
 
 //Class for first Opening Panel
 class MyPanel extends JPanel {
-
-    // private JTextField How;
-    // private JLabel jcomp2;
-    // private JLabel jcomp3;
     private JButton playButton;
     private JPanel contentPane;
 
     public MyPanel(JPanel panel) {
 
         contentPane = panel;
-        //'How' is a text box component; allow users to insert text; we probably don't need but keep just in case
-        // How = new JTextField (3);
-        //construct text components 
-        // jcomp2 = new JLabel ("How long were you parked?");
-        // jcomp3 = new JLabel ("Minutes");
         ImageIcon playButtonIcon = new ImageIcon("buttons/PlayButton.png");
         playButton = new JButton (playButtonIcon);
         //makes button image transparent
@@ -245,7 +236,7 @@ class MyPanel3 extends JPanel {
          // Display Pokémon name
          playerNameLabel = new JLabel(selectedPokemon.getName());
          playerNameLabel.setFont(new Font("Serif", Font.BOLD, 35));
-         playerNameLabel.setForeground(Color.BLACK);
+         playerNameLabel.setForeground(Color.WHITE);
          playerNameLabel.setBounds(150, 100, 200, 50);
 
         // Load Pokémon sprite
