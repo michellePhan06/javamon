@@ -117,7 +117,7 @@ class MyPanel extends JPanel {
         label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
         playButton.setLocation(520, 550);
         playButton.setSize(350, 150);
-        
+
         //Makes buttom usable, jumps it to next content frame
         playButton.addActionListener( new ActionListener()
         {
@@ -217,6 +217,7 @@ class MyPanel2 extends JPanel {
 class MyPanel3 extends JPanel {
     
     private JButton tackleButton;
+    private JButton specialButton;
     private JPanel contentPane;
     private JLabel playerSprite;
     private JLabel playerNameLabel;
@@ -239,14 +240,17 @@ class MyPanel3 extends JPanel {
         playerSprite.setBounds(150, 300, playerSpriteIcon.getIconWidth(), playerSpriteIcon.getIconHeight());
 
 
-        //Tackle button
+        //Tackle and Special move button
         ImageIcon tackleButtonIcon = new ImageIcon("buttons/PlayButton.png");
         tackleButton = new JButton (tackleButtonIcon);
+        ImageIcon specialButtonIcon = new ImageIcon("buttons/PlayButton.png");
+        specialButton = new JButton (specialButtonIcon);
         //makes button image transparent
         tackleButton.setContentAreaFilled(false);
+        specialButton.setContentAreaFilled(false);
 
         //battle Screen Image
-        ImageIcon imageIcon = new ImageIcon("panels/battleScreen.png");
+        ImageIcon imageIcon = new ImageIcon("panels/javamon_battleScreen.png");
         JLabel battleScreen = new JLabel(imageIcon);
 
         //adjust size and set layout of window
@@ -258,16 +262,18 @@ class MyPanel3 extends JPanel {
         playerHealth.setFont(new Font("Serif", Font.BOLD, 35));
         playerHealth.setOpaque(false);
         playerHealth.setForeground(Color.RED); 
-        playerHealth.setBounds (150, 200, 200, 200);
+        playerHealth.setBounds (1160, 500, 200, 200);
 
         enemyHealth.setFont(new Font("Serif", Font.BOLD, 35));
         enemyHealth.setOpaque(false);
         enemyHealth.setForeground(Color.RED); 
-        enemyHealth.setBounds (1000, 200, 200, 200);
+        enemyHealth.setBounds (1160, 570, 200, 200);
 
-        //tackleButton set up
-        tackleButton.setLocation(520, 550);
-        tackleButton.setSize(350, 150);
+        //tackle Button and Special move button set up
+        tackleButton.setLocation(43, 563);
+        tackleButton.setSize(798, 57);
+        specialButton.setLocation(43, 642);
+        specialButton.setSize(798, 57);
         
         //Makes buttom usable, when clicked, enemy health - 10
         tackleButton.addActionListener(new ActionListener()
@@ -299,10 +305,10 @@ class MyPanel3 extends JPanel {
 
         add (playerHealth);
         add (enemyHealth);
-        add (tackleButton);
         add (battleScreen);
-        add(playerSprite);
-        add(tackleButton);
+        add (playerSprite);
+        add (tackleButton);
+        add (specialButton);
     }
 
 }
