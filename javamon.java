@@ -8,7 +8,6 @@ import javax.swing.*;
 //importing libraries to add sound
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
@@ -22,7 +21,6 @@ public class javamon //main class where displayGUI contructs the window
     private JPanel contentPane;
     private MyPanel panel1; 
     private MyPanel2 panel2;
-    private MyPanel3 panel3;
 
     private void displayGUI()
     {
@@ -117,11 +115,9 @@ class MyPanel extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
         label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
-        // How.setBounds (245, 50, 60, 25);
-        // jcomp2.setBounds (35, 30, 185, 50);
-        // jcomp3.setBounds (250, 30, 60, 20);
         playButton.setLocation(520, 550);
         playButton.setSize(350, 150);
+        
         //Makes buttom usable, jumps it to next content frame
         playButton.addActionListener( new ActionListener()
         {
@@ -222,8 +218,6 @@ class MyPanel3 extends JPanel {
     
     private JButton tackleButton;
     private JPanel contentPane;
-    private JLabel playerHealth;
-    private JLabel enemyHealth;
     private JLabel playerSprite;
     private JLabel playerNameLabel;
 
@@ -258,7 +252,6 @@ class MyPanel3 extends JPanel {
         //adjust size and set layout of window
         setPreferredSize (new Dimension (1280, 720));
         setLayout (null);
-
         battleScreen.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
 
         //health text set up
