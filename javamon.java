@@ -164,9 +164,9 @@ class MyPanel2 extends JPanel {
         contentPane = panel;
 
         //creates pokemon object with sprite path
-        Pokemon waterPokemon = new Pokemon("Water", "sprites/waterTypeSprite.png");
-        Pokemon grassPokemon = new Pokemon("Grass", "sprites/grassTypeSprite.png");
-        Pokemon firePokemon = new Pokemon("Fire", "sprites/fireTypeSprite.png");
+        Pokemon waterPokemon = new Pokemon("Water", "panels/battleScreens/petermonPanel.png");
+        Pokemon grassPokemon = new Pokemon("Grass", "panels/battleScreens/sproutyPanel.png");
+        Pokemon firePokemon = new Pokemon("Fire", "panels/battleScreens/bowchellePanel.png");
         
         //creates each button in one line to reduce clutter
         JButton waterButton = new JButton(new ImageIcon("buttons/panel-2/waterPokeball.jpeg"));
@@ -219,7 +219,7 @@ class MyPanel3 extends JPanel {
     private JButton tackleButton;
     private JButton specialButton;
     private JPanel contentPane;
-    private JLabel playerSprite;
+    // private JLabel playerSprite;
     private JLabel playerNameLabel;
 
     public MyPanel3(JPanel panel, Pokemon selectedPokemon) {
@@ -235,9 +235,9 @@ class MyPanel3 extends JPanel {
          playerNameLabel.setBounds(150, 100, 200, 50);
 
         // Load Pokémon sprite
-        ImageIcon playerSpriteIcon = new ImageIcon(selectedPokemon.getSpritePath());
-        playerSprite = new JLabel(playerSpriteIcon);
-        playerSprite.setBounds(150, 300, playerSpriteIcon.getIconWidth(), playerSpriteIcon.getIconHeight());
+        // ImageIcon playerSpriteIcon = new ImageIcon(selectedPokemon.getSpritePath());
+        // playerSprite = new JLabel(playerSpriteIcon);
+        // playerSprite.setBounds(150, 300, playerSpriteIcon.getIconWidth(), playerSpriteIcon.getIconHeight());
 
 
         //Tackle and Special move button
@@ -250,7 +250,8 @@ class MyPanel3 extends JPanel {
         specialButton.setContentAreaFilled(false);
 
         //battle Screen Image
-        ImageIcon imageIcon = new ImageIcon("panels/javamon_battleScreen.png");
+
+        ImageIcon imageIcon = new ImageIcon(selectedPokemon.getSpritePath());
         JLabel battleScreen = new JLabel(imageIcon);
 
         //adjust size and set layout of window
@@ -259,15 +260,15 @@ class MyPanel3 extends JPanel {
         battleScreen.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
 
         //health text set up
-        playerHealth.setFont(new Font("Serif", Font.BOLD, 35));
+        playerHealth.setFont(new Font("Serif", Font.BOLD, 28));
         playerHealth.setOpaque(false);
         playerHealth.setForeground(Color.RED); 
-        playerHealth.setBounds (1160, 500, 200, 200);
+        playerHealth.setBounds (1205, 530, 150, 150);
 
-        enemyHealth.setFont(new Font("Serif", Font.BOLD, 35));
+        enemyHealth.setFont(new Font("Serif", Font.BOLD, 28));
         enemyHealth.setOpaque(false);
         enemyHealth.setForeground(Color.RED); 
-        enemyHealth.setBounds (1160, 570, 200, 200);
+        enemyHealth.setBounds (1205, 600, 150, 150);
 
         //tackle Button and Special move button set up
         tackleButton.setLocation(43, 563);
@@ -306,7 +307,7 @@ class MyPanel3 extends JPanel {
         add (playerHealth);
         add (enemyHealth);
         add (battleScreen);
-        add (playerSprite);
+        // add (playerSprite);
         add (tackleButton);
         add (specialButton);
     }
