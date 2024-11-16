@@ -286,12 +286,26 @@ class MyPanel3 extends JPanel {
                 enemyHP = enemyHP-10;
                 enemyHealth.setText(enemyHP+"/30");
 
+                // Switches to Win Screen when enemy javamon's hp reaches 0
+                if (enemyHP <= 0) {
+                    contentPane.add(new MyPanel4(), "Win Screen");
+                    ((CardLayout) contentPane.getLayout()).show(contentPane, "Win Screen");
+                    return;
+                }
+
                 // wait 1 second before player gets attacked
                 Timer timer = new Timer(1000, new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         // Update player's HP
                         playerHP -= 10;
                         playerHealth.setText(playerHP + "/30");
+
+                        // Switches to Lose Screen when player javamon's hp reaches 0
+                        if (playerHP <= 0) {
+                        contentPane.add(new MyPanel5(), "Lose Screen");
+                        ((CardLayout) contentPane.getLayout()).show(contentPane, "Lose Screen");
+                        return;
+                        }
                     }
                 });
 
@@ -311,4 +325,36 @@ class MyPanel3 extends JPanel {
         add (specialButton);
     }
 
+}
+
+// Win Screen Panel
+class MyPanel4 extends JPanel {
+    public MyPanel4() {
+        // Set layout and dimensions
+        setPreferredSize(new Dimension(1280, 720));
+        setLayout(null);
+        
+        // Add win screen image
+        ImageIcon winImageIcon = new ImageIcon("panels/winScreen.png");
+        JLabel winLabel = new JLabel(winImageIcon);
+        winLabel.setBounds(0, 0, winImageIcon.getIconWidth(), winImageIcon.getIconHeight());
+        
+        add(winLabel);
+    }
+}
+
+// Lose Screen Panel
+class MyPanel5 extends JPanel {
+    public MyPanel5() {
+        //Set layout and dimensions
+        setPreferredSize(new Dimension(1280, 720));
+        setLayout(null);
+
+        // Add lose screen image
+        ImageIcon loseImageIcon = new ImageIcon("panels/loseScreen.png");
+        JLabel loseLabel = new JLabel(loseImageIcon);
+        loseLabel.setBounds(0, 0, loseImageIcon.getIconWidth(), loseImageIcon.getIconHeight());
+
+        add(loseLabel);
+    }
 }
