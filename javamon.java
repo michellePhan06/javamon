@@ -4,6 +4,7 @@ package Javamon;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.Random;
 
 //importing libraries to add sound
 import java.io.File;
@@ -178,9 +179,9 @@ class MyPanel2 extends JPanel {
         contentPane = panel;
 
         //creates pokemon object with sprite path
-        Pokemon waterPokemon = new Pokemon("Water", "panels/battleScreens/petermonPanel.png", "buttons/watergun.png", "Petermon used Water Gun! Hitman-thom HP -10");
-        Pokemon grassPokemon = new Pokemon("Grass", "panels/battleScreens/sproutyPanel.png", "buttons/vinewhip.png", "Sprouty used Vine Whip! Hitman-thom HP -10");
-        Pokemon firePokemon = new Pokemon("Fire", "panels/battleScreens/bowchellePanel.png", "buttons/ember.png", "Bowchelle used Ember! Hitman-thom HP -10");
+        Pokemon waterPokemon = new Pokemon("Water", "panels/battleScreens/petermonPanel.png", "buttons/watergun.png", "Petermon used Water Gun!");
+        Pokemon grassPokemon = new Pokemon("Grass", "panels/battleScreens/sproutyPanel.png", "buttons/vinewhip.png", "Sprouty used Vine Whip!");
+        Pokemon firePokemon = new Pokemon("Fire", "panels/battleScreens/bowchellePanel.png", "buttons/ember.png", "Bowchelle used Ember!");
         
         //creates each button in one line to reduce clutter
         JButton waterButton = new JButton(new ImageIcon("buttons/panel-2/waterPokeball.jpeg"));
@@ -236,6 +237,7 @@ class MyPanel3 extends JPanel {
     private JButton specialButton;
     private JPanel contentPane;
     private JLabel battleMessageLabel;
+    private JLabel hitOrMissMessage;
     private JLabel playerHealth;
     private JLabel enemyHealth;
 
@@ -246,13 +248,18 @@ class MyPanel3 extends JPanel {
         contentPane = panel;
 
         // Initialize components
-        playerHealth = new JLabel("30/30");
-        enemyHealth = new JLabel("30/30");
+        playerHealth = new JLabel("30");
+        enemyHealth = new JLabel("30");
         battleMessageLabel = new JLabel("");
+        hitOrMissMessage = new JLabel("");
         //battle message label
         battleMessageLabel.setFont(new Font("Algerian", Font.BOLD, 24));
         battleMessageLabel.setForeground(Color.WHITE);
-        battleMessageLabel.setBounds(400, 50, 480, 50);
+        battleMessageLabel.setBounds(500, 160, 650, 75);
+        //hit or miss message label
+        hitOrMissMessage.setFont(new Font("Algerian", Font.PLAIN, 18));
+        hitOrMissMessage.setForeground(Color.WHITE);
+        hitOrMissMessage.setBounds(520, 200, 650, 75);
 
         //tackleButton
         ImageIcon tackleButtonIcon = new ImageIcon("buttons/tackle.png");
@@ -278,28 +285,27 @@ class MyPanel3 extends JPanel {
         setLayout(null);
         battleScreen.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
 
-        playerHealth.setFont(new Font("Serif", Font.BOLD, 28));
-        playerHealth.setForeground(Color.RED);
-        playerHealth.setBounds(1205, 530, 150, 150);
+        playerHealth.setFont(new Font("Algerian", Font.BOLD, 28));
+        playerHealth.setForeground(Color.WHITE);
+        playerHealth.setBounds(1215, 530, 150, 150);
 
-        enemyHealth.setFont(new Font("Serif", Font.BOLD, 28));
-        enemyHealth.setForeground(Color.RED);
-        enemyHealth.setBounds(1205, 600, 150, 150);
+        enemyHealth.setFont(new Font("Algerian", Font.BOLD, 28));
+        enemyHealth.setForeground(Color.WHITE);
+        enemyHealth.setBounds(1215, 600, 150, 150);
 
-
-        battleMessageLabel.setBounds(150, 560, 650, 75);
         // Tackle button logic
         tackleButton.addActionListener(e -> {
             javamon.playClickSound("audio-files/click.wav", -20.f);
-            handleBattleSequence("Player used Tackle! Enemy HP -10", true);
+            handleBattleSequence("tackle", true);
         });
 
         specialButton.addActionListener(e -> {
             javamon.playClickSound("audio-files/click.wav", -20.f);
-            handleBattleSequence(selectedPokemon.getSpecialText(), true);
+            handleBattleSequence("special", true);
         });
 
         add(battleMessageLabel);
+        add(hitOrMissMessage);
         add(playerHealth);
         add(enemyHealth);
         add(battleScreen);
@@ -307,30 +313,65 @@ class MyPanel3 extends JPanel {
         add(tackleButton);
     }
 
-    private void handleBattleSequence(String message, boolean isPlayerTurn) {
+    private void handleBattleSequence(String move, boolean isPlayerTurn) {
         // Hide buttons and display the message
         tackleButton.setVisible(false);
         specialButton.setVisible(false);
-        battleMessageLabel.setText(message);
 
-        Timer timer = new Timer(3000, evt -> {
-            if (isPlayerTurn) {
-                // Deduct enemy health
-                enemyHP -= 10;
-                enemyHealth.setText(enemyHP + "/30");
+        Random rand = new Random();
 
+        Timer timer = new Timer(2000, evt -> {
+            if (isPlayerTurn && move.equals("tackle")) {
+                battleMessageLabel.setText("Player used Tackle");
+                int randomInt = rand.nextInt(10);
+                // Deduct player health, 70% chance hit
+                if(randomInt <= 8){
+                    enemyHP -= 10;
+                    enemyHealth.setText(enemyHP + "");
+                    hitOrMissMessage.setText("Tackle hit! -10 HP");
+                }
                 if (enemyHP <= 0) {
-                    battleMessageLabel.setText("Enemy Pokémon fainted!");
+                    battleMessageLabel.setText("Enemy Javamon fainted!");
                     showEndScreen(true);
                     return;
                 }
-
                 // Prepare for enemy turn
-                handleBattleSequence("Enemy used Attack! Player HP -10", false);
-            } else {
-                // Deduct player health
-                playerHP -= 10;
-                playerHealth.setText(playerHP + "/30");
+                handleBattleSequence("attack", false);
+            } 
+            else if (isPlayerTurn && move.equals("special")) {
+                battleMessageLabel.setText("Player used special attack");
+                int randomInt = rand.nextInt(10);
+                // Deduct player health, 50% chance hit
+                if(randomInt <= 4){
+                    enemyHP -= 15;
+                    enemyHealth.setText(enemyHP + "");
+                    hitOrMissMessage.setText("special attack hit! -15 HP");
+                }
+                else{
+                    hitOrMissMessage.setText("special attack missed!");
+                }
+
+                if (enemyHP <= 0) {
+                    battleMessageLabel.setText("Enemy Javamon fainted!");
+                    showEndScreen(true);
+                    return;
+                }
+                // Prepare for enemy turn
+                handleBattleSequence("attack", false);
+            }
+            else {
+                // Deduct player health, 90% chance hit
+                battleMessageLabel.setText("Enemy used Attack");
+                int randomInt = rand.nextInt(10);
+                if(randomInt <= 8){
+                    playerHP -= 10;
+                    playerHealth.setText(playerHP + "");
+                    hitOrMissMessage.setText("Hitman-thom attack hit! -10 HP");
+                }
+                else{
+                    hitOrMissMessage.setText("Hitman-thom attack missed!");
+                }
+                
 
                 if (playerHP <= 0) {
                     battleMessageLabel.setText("Your Pokémon fainted!");
@@ -339,7 +380,6 @@ class MyPanel3 extends JPanel {
                 }
 
                 // Re-enable buttons for player's turn
-                battleMessageLabel.setText("");
                 tackleButton.setVisible(true);
                 specialButton.setVisible(true);
             }
