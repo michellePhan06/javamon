@@ -125,7 +125,7 @@ class MyPanel extends JPanel {
         {
             public void actionPerformed(ActionEvent e)
             {
-                //javamon.playClickSound("audio-files/click.wav", -20.f);
+                javamon.playClickSound("audio-files/click.wav", -20.f);
                 CardLayout cardLayout = (CardLayout) contentPane.getLayout();
                 cardLayout.next(contentPane);
             }
@@ -135,7 +135,7 @@ class MyPanel extends JPanel {
         add (label);   
         
         //plays music when panel 1 loads
-        //javamon.playMusic("audio-files/panel1.wav", -20.f);
+        javamon.playMusic("audio-files/panel1.wav", -20.f);
     }
 }
 
@@ -204,17 +204,17 @@ class MyPanel2 extends JPanel {
         fireButton.setBounds (830, 237, 277, 339);
 
         waterButton.addActionListener(e -> {
-            //javamon.playClickSound("audio-files/click.wav", -20.f);
+            javamon.playClickSound("audio-files/click.wav", -20.f);
             contentPane.add(new MyPanel3(contentPane, waterJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
         grassButton.addActionListener(e -> {
-            //javamon.playClickSound("audio-files/click.wav", -20.f);
+            javamon.playClickSound("audio-files/click.wav", -20.f);
             contentPane.add(new MyPanel3(contentPane, grassJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
         fireButton.addActionListener(e -> {
-            //javamon.playClickSound("audio-files/click.wav", -20.f);
+            javamon.playClickSound("audio-files/click.wav", -20.f);
             contentPane.add(new MyPanel3(contentPane, fireJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
@@ -288,12 +288,12 @@ class MyPanel3 extends JPanel {
 
         // Tackle button logic
         tackleButton.addActionListener(e -> {
-            //javamon.playClickSound("audio-files/click.wav", -20.f);
+            javamon.playClickSound("audio-files/click.wav", -20.f);
             handleBattleSequence("tackle", true);
         });
 
         specialButton.addActionListener(e -> {
-            //javamon.playClickSound("audio-files/click.wav", -20.f);
+            javamon.playClickSound("audio-files/click.wav", -20.f);
             handleBattleSequence("special", true);
         });
 
