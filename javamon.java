@@ -28,7 +28,6 @@ public class javamon //main class where displayGUI contructs the window
         //set title of window to Java-Mon and store in frame
         JFrame frame = new JFrame("Java-Mon"); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setSize(400,400);
         JPanel contentPane = new JPanel(); 
         contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); //border thickness
         contentPane.setLayout(new CardLayout()); //card layout allows for multiple windows
@@ -44,6 +43,7 @@ public class javamon //main class where displayGUI contructs the window
         frame.setVisible(true);
     }
 
+    //makes code runnable
     public static void main(String... args)
     {
         SwingUtilities.invokeLater(new Runnable()
@@ -56,7 +56,7 @@ public class javamon //main class where displayGUI contructs the window
         });
     }
 
-    //method to play audio lol
+    //method to play audio
     public static void playMusic(String filePath, float volume) 
     {
         try {
@@ -74,7 +74,7 @@ public class javamon //main class where displayGUI contructs the window
         }
     }
 
-    //plays clicking sound lol
+    //plays clicking sound
     public static void playClickSound(String filePath, float volume)
     {
         try {
@@ -100,13 +100,6 @@ class MyPanel extends JPanel {
     public MyPanel(JPanel panel) {
 
         contentPane = panel;
-        ImageIcon playButtonIcon = new ImageIcon("buttons/PlayButton.png");
-        playButton = new JButton (playButtonIcon);
-        playButton.setBorderPainted(false);
-        playButton.setFocusPainted(false);
-        //makes button image transparent
-        playButton.setContentAreaFilled(false);
-
 
         //adjust size and set layout of window
         setPreferredSize (new Dimension (1280, 720));
@@ -118,15 +111,21 @@ class MyPanel extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
         label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
-        playButton.setLocation(520, 550);
-        playButton.setSize(350, 150);
 
-        //Makes buttom usable, jumps it to next content frame
+        //create playButton
+        ImageIcon playButtonIcon = new ImageIcon("buttons/PlayButton.png");
+        playButton = new JButton (playButtonIcon);
+        playButton.setBorderPainted(false);
+        playButton.setFocusPainted(false);
+        playButton.setContentAreaFilled(false);
+        playButton.setBounds(520,550,350,150);
+
+        //Makes buttom usable, jumps to next content frame
         playButton.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                javamon.playClickSound("audio-files/click.wav", -20.f);
+                //javamon.playClickSound("audio-files/click.wav", -20.f);
                 CardLayout cardLayout = (CardLayout) contentPane.getLayout();
                 cardLayout.next(contentPane);
             }
@@ -136,18 +135,18 @@ class MyPanel extends JPanel {
         add (label);   
         
         //plays music when panel 1 loads
-        javamon.playMusic("audio-files/panel1.wav", -20.f);
+        //javamon.playMusic("audio-files/panel1.wav", -20.f);
     }
 }
 
-//class for selected pokemon to import from panel 2 to panel 3
-class Pokemon {
+//class for selected Javamon to import from panel 2 to panel 3
+class Javamon {
     private String name;
     private String spritePath;
     private String specialAttack;
     private String specialText;
 
-    public Pokemon(String name, String spritePath, String specialAttack, String specialText) {
+    public Javamon(String name, String spritePath, String specialAttack, String specialText) {
         this.name = name;
         this.spritePath = spritePath;
         this.specialAttack = specialAttack;
@@ -171,54 +170,52 @@ class Pokemon {
     }
 }
 
-// Panel to select starter pokemon
+// Panel to select starter Javamon
 class MyPanel2 extends JPanel {
     private JPanel contentPane;
 
     public MyPanel2(JPanel panel) {
         contentPane = panel;
 
-        //creates pokemon object with sprite path
-        Pokemon waterPokemon = new Pokemon("Water", "panels/battleScreens/petermonPanel.png", "buttons/watergun.png", "Petermon used Water Gun!");
-        Pokemon grassPokemon = new Pokemon("Grass", "panels/battleScreens/sproutyPanel.png", "buttons/vinewhip.png", "Sprouty used Vine Whip!");
-        Pokemon firePokemon = new Pokemon("Fire", "panels/battleScreens/bowchellePanel.png", "buttons/ember.png", "Bowchelle used Ember!");
-        
-        //creates each button in one line to reduce clutter
-        JButton waterButton = new JButton(new ImageIcon("buttons/panel-2/waterPokeball.jpeg"));
-        JButton grassButton = new JButton(new ImageIcon("buttons/panel-2/grassPokeball.jpeg"));
-        JButton fireButton = new JButton(new ImageIcon("buttons/panel-2/firePokeball.jpeg"));
-        waterButton.setBorderPainted(false);
-        grassButton.setBorderPainted(false);
-        fireButton.setBorderPainted(false);
+        //creates Javamon object with sprite path
+        Javamon waterJavamon = new Javamon("Petermon", "panels/battleScreens/petermonPanel.png", "buttons/watergun.png", "Water Gun!");
+        Javamon grassJavamon = new Javamon("Sprouty", "panels/battleScreens/sproutyPanel.png", "buttons/vinewhip.png", "Vine Whip!");
+        Javamon fireJavamon = new Javamon("Bowchelle", "panels/battleScreens/bowchellePanel.png", "buttons/ember.png", "Ember!");
+    
 
         //adjust size and set layout of window
         setPreferredSize (new Dimension (1280, 720));
         setLayout (null);
 
         //set component bounds (only needed by Absolute Positioning)
-
         ImageIcon imageIcon = new ImageIcon("panels/Selection_Panel.png");
-        JLabel label = new JLabel(imageIcon);
+        JLabel selectionPanel = new JLabel(imageIcon);
+        selectionPanel.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
 
-        label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
-
+        //create select your javamon buttons
+        JButton waterButton = new JButton(new ImageIcon("buttons/panel-2/waterPokeball.jpeg"));
+        JButton grassButton = new JButton(new ImageIcon("buttons/panel-2/grassPokeball.jpeg"));
+        JButton fireButton = new JButton(new ImageIcon("buttons/panel-2/firePokeball.jpeg"));
+        waterButton.setBorderPainted(false);
+        grassButton.setBorderPainted(false);
+        fireButton.setBorderPainted(false);
         waterButton.setBounds (183, 237, 277, 339);
         grassButton.setBounds (505, 237, 277, 339);
         fireButton.setBounds (830, 237, 277, 339);
 
         waterButton.addActionListener(e -> {
-            javamon.playClickSound("audio-files/click.wav", -20.f);
-            contentPane.add(new MyPanel3(contentPane, waterPokemon), "Panel 3");
+            //javamon.playClickSound("audio-files/click.wav", -20.f);
+            contentPane.add(new MyPanel3(contentPane, waterJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
         grassButton.addActionListener(e -> {
-            javamon.playClickSound("audio-files/click.wav", -20.f);
-            contentPane.add(new MyPanel3(contentPane, grassPokemon), "Panel 3");
+            //javamon.playClickSound("audio-files/click.wav", -20.f);
+            contentPane.add(new MyPanel3(contentPane, grassJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
         fireButton.addActionListener(e -> {
-            javamon.playClickSound("audio-files/click.wav", -20.f);
-            contentPane.add(new MyPanel3(contentPane, firePokemon), "Panel 3");
+            //javamon.playClickSound("audio-files/click.wav", -20.f);
+            contentPane.add(new MyPanel3(contentPane, fireJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
 
@@ -226,13 +223,12 @@ class MyPanel2 extends JPanel {
         add (waterButton);
         add (grassButton);
         add (fireButton);
-        add (label);
-        // add (jcomp4);       
+        add (selectionPanel);     
     }
 }
 
 class MyPanel3 extends JPanel {
-
+    private Javamon selectedJavamon;
     private JButton tackleButton;
     private JButton specialButton;
     private JPanel contentPane;
@@ -240,22 +236,24 @@ class MyPanel3 extends JPanel {
     private JLabel hitOrMissMessage;
     private JLabel playerHealth;
     private JLabel enemyHealth;
-
     private int enemyHP = 30;
     private int playerHP = 30;
 
-    public MyPanel3(JPanel panel, Pokemon selectedPokemon) {
-        contentPane = panel;
+    public MyPanel3(JPanel panel, Javamon selectedJavamon) {
+        this.contentPane = panel;
+        this.selectedJavamon = selectedJavamon;
 
         // Initialize components
         playerHealth = new JLabel("30");
         enemyHealth = new JLabel("30");
         battleMessageLabel = new JLabel("");
         hitOrMissMessage = new JLabel("");
+
         //battle message label
         battleMessageLabel.setFont(new Font("Algerian", Font.BOLD, 24));
         battleMessageLabel.setForeground(Color.WHITE);
         battleMessageLabel.setBounds(500, 160, 650, 75);
+
         //hit or miss message label
         hitOrMissMessage.setFont(new Font("Algerian", Font.PLAIN, 18));
         hitOrMissMessage.setForeground(Color.WHITE);
@@ -264,43 +262,38 @@ class MyPanel3 extends JPanel {
         //tackleButton
         ImageIcon tackleButtonIcon = new ImageIcon("buttons/tackle.png");
         tackleButton = new JButton(tackleButtonIcon);
-        tackleButton.setBounds(43, 563, 798, 57);
-
+        tackleButton.setBounds(33, 570, 815, 57);
+        tackleButton.setBorderPainted(false);
         
         //specialButton
-        ImageIcon specialButtonIcon = new ImageIcon(selectedPokemon.getSpecialAttack());
+        ImageIcon specialButtonIcon = new ImageIcon(selectedJavamon.getSpecialAttack());
         specialButton = new JButton(specialButtonIcon);
-        specialButton.setBounds(43, 643, 798, 56);
+        specialButton.setBounds(33, 650, 815, 57);
+        specialButton.setBorderPainted(false);
 
-        // // Removes the border
-         tackleButton.setBorderPainted(false); 
-         specialButton.setBorderPainted(false);
-    
-
-        ImageIcon imageIcon = new ImageIcon(selectedPokemon.getSpritePath());
+        //pull up battle screen related to chosen javamon
+        ImageIcon imageIcon = new ImageIcon(selectedJavamon.getSpritePath());
         JLabel battleScreen = new JLabel(imageIcon);
-
-        // Adjust layout
         setPreferredSize(new Dimension(1280, 720));
         setLayout(null);
         battleScreen.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
 
+        //Set font player and enemy health
         playerHealth.setFont(new Font("Algerian", Font.BOLD, 28));
         playerHealth.setForeground(Color.WHITE);
         playerHealth.setBounds(1215, 530, 150, 150);
-
         enemyHealth.setFont(new Font("Algerian", Font.BOLD, 28));
         enemyHealth.setForeground(Color.WHITE);
         enemyHealth.setBounds(1215, 600, 150, 150);
 
         // Tackle button logic
         tackleButton.addActionListener(e -> {
-            javamon.playClickSound("audio-files/click.wav", -20.f);
+            //javamon.playClickSound("audio-files/click.wav", -20.f);
             handleBattleSequence("tackle", true);
         });
 
         specialButton.addActionListener(e -> {
-            javamon.playClickSound("audio-files/click.wav", -20.f);
+            //javamon.playClickSound("audio-files/click.wav", -20.f);
             handleBattleSequence("special", true);
         });
 
@@ -318,20 +311,24 @@ class MyPanel3 extends JPanel {
         tackleButton.setVisible(false);
         specialButton.setVisible(false);
 
+        //Set up rand for accuracy
         Random rand = new Random();
-
         Timer timer = new Timer(2000, evt -> {
             if (isPlayerTurn && move.equals("tackle")) {
-                battleMessageLabel.setText("Player used Tackle");
+                battleMessageLabel.setText(selectedJavamon.getName()+" used Tackle");
                 int randomInt = rand.nextInt(10);
-                // Deduct player health, 70% chance hit
+                //Deduct enemy health if tackle hit, 90% chance hit
                 if(randomInt <= 8){
                     enemyHP -= 10;
                     enemyHealth.setText(enemyHP + "");
                     hitOrMissMessage.setText("Tackle hit! -10 HP");
                 }
+                else{
+                    hitOrMissMessage.setText("Tackle missed!");
+                }
+                //if enemy health is less than 0, show winning screen
                 if (enemyHP <= 0) {
-                    battleMessageLabel.setText("Enemy Javamon fainted!");
+                    battleMessageLabel.setText("Hitman-thom fainted!");
                     showEndScreen(true);
                     return;
                 }
@@ -339,10 +336,10 @@ class MyPanel3 extends JPanel {
                 handleBattleSequence("attack", false);
             } 
             else if (isPlayerTurn && move.equals("special")) {
-                battleMessageLabel.setText("Player used special attack");
+                battleMessageLabel.setText(selectedJavamon.getName()+ " used " + selectedJavamon.getSpecialText());
                 int randomInt = rand.nextInt(10);
-                // Deduct player health, 50% chance hit
-                if(randomInt <= 4){
+                // Deduct player health if hit, 60% chance hit
+                if(randomInt <= 5){
                     enemyHP -= 15;
                     enemyHealth.setText(enemyHP + "");
                     hitOrMissMessage.setText("special attack hit! -15 HP");
@@ -350,9 +347,9 @@ class MyPanel3 extends JPanel {
                 else{
                     hitOrMissMessage.setText("special attack missed!");
                 }
-
+                //if enemy health is less than 0, show winning screen
                 if (enemyHP <= 0) {
-                    battleMessageLabel.setText("Enemy Javamon fainted!");
+                    battleMessageLabel.setText("Hitman-thom fainted!");
                     showEndScreen(true);
                     return;
                 }
@@ -361,7 +358,7 @@ class MyPanel3 extends JPanel {
             }
             else {
                 // Deduct player health, 90% chance hit
-                battleMessageLabel.setText("Enemy used Attack");
+                battleMessageLabel.setText("Hitman-thom used Attack");
                 int randomInt = rand.nextInt(10);
                 if(randomInt <= 8){
                     playerHP -= 10;
@@ -371,10 +368,9 @@ class MyPanel3 extends JPanel {
                 else{
                     hitOrMissMessage.setText("Hitman-thom attack missed!");
                 }
-                
-
+                //if player health is less than 0, show winning screen
                 if (playerHP <= 0) {
-                    battleMessageLabel.setText("Your Pokémon fainted!");
+                    battleMessageLabel.setText(selectedJavamon.getName()+" fainted!");
                     showEndScreen(false);
                     return;
                 }
@@ -388,7 +384,7 @@ class MyPanel3 extends JPanel {
         timer.setRepeats(false);
         timer.start();
     }
-
+    //method to transfer to ending screen
     private void showEndScreen(boolean playerWon) {
         Timer timer = new Timer(3000, evt -> {
             contentPane.add(playerWon ? new MyPanel4() : new MyPanel5(), playerWon ? "Win Screen" : "Lose Screen");
@@ -399,9 +395,7 @@ class MyPanel3 extends JPanel {
     }
 }
 
-
-
-// Win Screen Panel
+//Win Screen Panel
 class MyPanel4 extends JPanel {
     public MyPanel4() {
         // Set layout and dimensions
