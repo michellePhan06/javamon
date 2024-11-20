@@ -173,10 +173,15 @@ class Javamon {
 // Panel to select starter Javamon
 class MyPanel2 extends JPanel {
     private JPanel contentPane;
+    private JLabel chooseJavamon;
 
     public MyPanel2(JPanel panel) {
         contentPane = panel;
 
+        chooseJavamon = new JLabel("Choose your Javamon!");
+        chooseJavamon.setFont(new Font("Algerian", Font.BOLD, 50));
+        chooseJavamon.setForeground(Color.BLACK);
+        chooseJavamon.setBounds(340, 590, 1000, 150);
         //creates Javamon object with sprite path
         Javamon waterJavamon = new Javamon("Petermon", "panels/battleScreens/petermonPanel.png", "buttons/watergun.png", "Water Gun!");
         Javamon grassJavamon = new Javamon("Sprouty", "panels/battleScreens/sproutyPanel.png", "buttons/vinewhip.png", "Vine Whip!");
@@ -220,10 +225,11 @@ class MyPanel2 extends JPanel {
         });
 
         //add components
+        add (chooseJavamon);   
         add (waterButton);
         add (grassButton);
         add (fireButton);
-        add (selectionPanel);     
+        add (selectionPanel);  
     }
 }
 
