@@ -28,7 +28,7 @@ public class javamon //main class where displayGUI contructs the window
         //set title of window to Java-Mon and store in frame
         JFrame frame = new JFrame("Java-Mon"); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel contentPane = new JPanel(); 
+        contentPane = new JPanel(); 
         contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); //border thickness
         contentPane.setLayout(new CardLayout()); //card layout allows for multiple windows
         //create different windows for different panels
