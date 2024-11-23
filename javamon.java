@@ -20,8 +20,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class javamon //main class where displayGUI contructs the window
 {
     private JPanel contentPane;
-    private MyPanel panel1; 
-    private MyPanel2 panel2;
+    private startPanel panel1; 
+    private selectJavamonPanel panel2;
 
     private void displayGUI()
     {
@@ -32,10 +32,10 @@ public class javamon //main class where displayGUI contructs the window
         contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); //border thickness
         contentPane.setLayout(new CardLayout()); //card layout allows for multiple windows
         //create different windows for different panels
-        panel1 = new MyPanel(contentPane);
-        panel2 = new MyPanel2(contentPane);
-        contentPane.add(panel1, "Panel 1"); 
-        contentPane.add(panel2, "Panel 2");
+        panel1 = new startPanel(contentPane);
+        panel2 = new selectJavamonPanel(contentPane);
+        contentPane.add(panel1, "selectPanel"); 
+        contentPane.add(panel2, "selectJavamonPanel");
         frame.setContentPane(contentPane);
         //contains pack to minimize, expand, and close window
         frame.pack();  
@@ -93,14 +93,13 @@ public class javamon //main class where displayGUI contructs the window
 }
 
 //Class for first Opening Panel
-class MyPanel extends JPanel {
+class startPanel extends JPanel {
     private JButton playButton;
     private JPanel contentPane;
 
-    public MyPanel(JPanel panel) {
+    public startPanel(JPanel panel) {
 
         contentPane = panel;
-
         //adjust size and set layout of window
         setPreferredSize (new Dimension (1280, 720));
         setLayout (null);
@@ -133,7 +132,6 @@ class MyPanel extends JPanel {
 
         add (playButton);  
         add (label);   
-        
         //plays music when panel 1 loads
         javamon.playMusic("audio-files/panel1.wav", -20.f);
     }
@@ -171,11 +169,11 @@ class Javamon {
 }
 
 // Panel to select starter Javamon
-class MyPanel2 extends JPanel {
+class selectJavamonPanel extends JPanel {
     private JPanel contentPane;
     private JLabel chooseJavamon;
 
-    public MyPanel2(JPanel panel) {
+    public selectJavamonPanel(JPanel panel) {
         contentPane = panel;
 
         chooseJavamon = new JLabel("Choose your Javamon!");
@@ -210,17 +208,17 @@ class MyPanel2 extends JPanel {
 
         waterButton.addActionListener(e -> {
             javamon.playClickSound("audio-files/click.wav", -20.f);
-            contentPane.add(new MyPanel3(contentPane, waterJavamon), "Panel 3");
+            contentPane.add(new battlePanel(contentPane, waterJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
         grassButton.addActionListener(e -> {
             javamon.playClickSound("audio-files/click.wav", -20.f);
-            contentPane.add(new MyPanel3(contentPane, grassJavamon), "Panel 3");
+            contentPane.add(new battlePanel(contentPane, grassJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
         fireButton.addActionListener(e -> {
             javamon.playClickSound("audio-files/click.wav", -20.f);
-            contentPane.add(new MyPanel3(contentPane, fireJavamon), "Panel 3");
+            contentPane.add(new battlePanel(contentPane, fireJavamon), "Panel 3");
             ((CardLayout) contentPane.getLayout()).show(contentPane, "Panel 3");
         });
 
@@ -233,7 +231,7 @@ class MyPanel2 extends JPanel {
     }
 }
 
-class MyPanel3 extends JPanel {
+class battlePanel extends JPanel {
     private Javamon selectedJavamon;
     private JButton tackleButton;
     private JButton specialButton;
@@ -245,7 +243,7 @@ class MyPanel3 extends JPanel {
     private int enemyHP = 30;
     private int playerHP = 30;
 
-    public MyPanel3(JPanel panel, Javamon selectedJavamon) {
+    public battlePanel(JPanel panel, Javamon selectedJavamon) {
         this.contentPane = panel;
         this.selectedJavamon = selectedJavamon;
 
@@ -393,7 +391,7 @@ class MyPanel3 extends JPanel {
     //method to transfer to ending screen
     private void showEndScreen(boolean playerWon) {
         Timer timer = new Timer(3000, evt -> {
-            contentPane.add(playerWon ? new MyPanel4() : new MyPanel5(), playerWon ? "Win Screen" : "Lose Screen");
+            contentPane.add(playerWon ? new winPanel() : new losePanel(), playerWon ? "Win Screen" : "Lose Screen");
             ((CardLayout) contentPane.getLayout()).show(contentPane, playerWon ? "Win Screen" : "Lose Screen");
         });
         timer.setRepeats(false);
@@ -402,8 +400,8 @@ class MyPanel3 extends JPanel {
 }
 
 //Win Screen Panel
-class MyPanel4 extends JPanel {
-    public MyPanel4() {
+class winPanel extends JPanel {
+    public winPanel() {
         // Set layout and dimensions
         setPreferredSize(new Dimension(1280, 720));
         setLayout(null);
@@ -418,8 +416,8 @@ class MyPanel4 extends JPanel {
 }
 
 // Lose Screen Panel
-class MyPanel5 extends JPanel {
-    public MyPanel5() {
+class losePanel extends JPanel {
+    public losePanel() {
         //Set layout and dimensions
         setPreferredSize(new Dimension(1280, 720));
         setLayout(null);
